@@ -1,4 +1,5 @@
 import {Config} from 'protractor';
+import * as reporter from "cucumber-html-reporter";
 
 // An example configuration file
 export let config: Config = {
@@ -22,11 +23,33 @@ export let config: Config = {
     specs: ['../features/demo.feature'],
 
     cucumberOpts: {
-        // require step definitions
+        
+        tags: "@CalculatorTesting",
+        format: 'json:./cucumberreport.json',
         require: [
           './stepDefinitions/*.js' 
         ]
-      }
+      },
+      onComplete: () => {
+          var options = {
+            theme: 'bootstrap',
+            jsonFile: './cucumberreport.json',
+            output: './cucumber_report.html',
+            reportSuiteAsScenarios: true,
+            scenarioTimestamp: true,
+            launchReport: true,
+            metadata: {
+                "App Version":"0.3.2",
+                "Test Environment": "Development",
+                "Browser": "Chrome  83.0.4103.61",
+                "Platform": "Windows 10",
+                "Parallel": "Scenarios",
+                "Executed": "Remote"
+            }
+        };
+        reporter.generate(options);
+
+        }
   
     
   };
