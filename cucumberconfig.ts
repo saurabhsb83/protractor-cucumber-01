@@ -24,7 +24,7 @@ export let config: Config = {
 
     cucumberOpts: {
         
-        tags: "@CalculatorTesting",
+        //tags: "@CalculatorTesting",
         format: 'json:./cucumberreport.json',
         require: [
           './stepDefinitions/*.js' 
